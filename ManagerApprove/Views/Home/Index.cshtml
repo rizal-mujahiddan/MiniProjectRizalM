@@ -1,0 +1,72 @@
+﻿<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+    <div>
+        <form method="get" id="pageSizeForm">
+            <label for="pageSize">Items per page:</label>
+            <select id="pageSize" name="pageSize" data-selected-size="@Model.PageSize">
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="75">75</option>
+                <option value="100">100</option>
+            </select>
+        </form>
+    </div>
+
+    <table class="table" id="myTable">
+        <!-- Table headers -->
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Hours Worked</th>
+                <th>Status</th>
+                <!-- Other columns -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var timesh in Model.Items)
+            {
+                <tr data-url="@Url.Action("Details", "Home", new { id = timesh.TimesheetId })">
+                    <td>@timesh.Name</td>
+                    <td>@timesh.Date</td>
+                    <td>@timesh.HoursWorked</td>
+                    <td>@timesh.Status</td>
+                    <!-- Other columns -->
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <nav>
+        <ul class="pagination">
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { pageIndex = i, pageSize = Model.PageSize })">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var selectedSize = $('#pageSize').data('selected-size');
+            $('#pageSize').val(selectedSize);
+
+            $('#pageSize').on('change', function () {
+                $('#pageSizeForm').submit();
+            });
+
+            $('#myTable tbody tr').click(function () {
+                // Get the URL from data attribute
+                var url = $(this).data('url');
+                // Redirect to the URL
+                window.location.href = url;
+            });
+        });
+    </script>
+}

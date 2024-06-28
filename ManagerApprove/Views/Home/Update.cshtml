@@ -1,0 +1,68 @@
+﻿<div class="container mt-5">
+    <form asp-action="Updating" asp-controller="Home" method="post">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                @* <label for="timesheetId" class="form-label">Timesheet ID</label> *@
+                <input type="number" class="form-control" id="timesheetId"
+                       name="timesheetId" value="@Model.TimesheetId" hidden>
+            </div>
+            <div class="col-md-6">
+                @* <label for="employeeId" class="form-label">Employee ID</label> *@
+                <input type="number" class="form-control" id="employeeId"
+                       name="employeeId" value="@Model.EmployeeId" hidden>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name"
+                       name="name" value="@Model.Name" readonly>
+            </div>
+            <div class="col-md-6">
+                <label for="date" class="form-label">Datetime</label>
+                <input type="datetime-local" class="form-control" id="date"
+                       name="date" value="@Model.Date.ToString("yyyy-MM-ddTHH:mm")">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="hoursWorked" class="form-label">hoursWorked</label>
+                <input type="number" class="form-control" id="hoursWorked"
+                       name="hoursWorked" value="@Model.HoursWorked" >
+            </div>
+            <div class="col-md-6">
+                <label for="status" class="form-label">Status</label>
+                <select id="status" name="status" class="form-select" autocomplete>
+                    @if (Model.Status == "Pending")
+                    {
+                        <option value="Pending" selected>Pending</option>
+                    }
+                    else
+                    {
+                        <option value="Pending">Pending</option>
+                    }
+
+                    @if (Model.Status == "Approved")
+                    {
+                        <option value="Approved" selected>Approved</option>
+                    }
+                    else
+                    {
+                        <option value="Approved">Approved</option>
+                    }
+                    @if (Model.Status == "Rejected")
+                    {
+                        <option value="Rejected" selected>Rejected</option>
+                    }
+                    else
+                    {
+                        <option value="Rejected">Rejected</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <button type="submit" class="btn btn-danger">Update Now</button>
+        </div>
+    </form>
+</div>
