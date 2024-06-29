@@ -13,7 +13,7 @@
         </form>
     </div>
 
-    <table class="table" id="myTable">
+    <table class="table table-hover table-striped" id="myTable">
         <!-- Table headers -->
         <thead>
             <tr>
@@ -27,7 +27,7 @@
         <tbody>
             @foreach (var timesh in Model.Items)
             {
-                <tr data-url="@Url.Action("Details", "Home", new { id = timesh.TimesheetId })">
+                <tr style="cursor:pointer;" data-url="@Url.Action("Details", "Home", new { id = timesh.TimesheetId })">
                     <td>@timesh.Name</td>
                     <td>@timesh.Date</td>
                     <td>@timesh.HoursWorked</td>

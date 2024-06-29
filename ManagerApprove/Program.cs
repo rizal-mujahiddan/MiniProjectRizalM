@@ -7,24 +7,23 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var mydb = builder.Configuration.GetConnectionString("MyDB");
+var hangdb = builder.Configuration.GetConnectionString("HangfireDB");
+
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<MiniProjDbContext>(options => 
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MyDB")));
-
-
-var mydb = builder.Configuration.GetConnectionString("MyDB");
+    options.UseSqlServer(mydb));
 
 builder.Services.AddScoped<ITimesheet, TimesheetService>();
-
-
 
 builder.Services.AddHangfire(config =>
 config.SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
     .UseSimpleAssemblyNameTypeSerializer()
     .UseDefaultTypeSerializer()
     .UseRecommendedSerializerSettings()
-    .UseSqlServerStorage(mydb, new SqlServerStorageOptions
+    .UseSqlServerStorage(hangdb, new SqlServerStorageOptions
     {
         CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
         SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),

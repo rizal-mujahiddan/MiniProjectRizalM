@@ -18,7 +18,13 @@ namespace EmployeeLogin
                 Console.WriteLine("1. Login");
                 Console.WriteLine("2. Exit");
 
-                var choice = Convert.ToInt32(Console.ReadLine());
+                
+                if (!int.TryParse(Console.ReadLine(),out int choice)) {
+                    Console.WriteLine("Choice Invalid");
+                    Console.ReadKey();
+                    continue;
+                }
+
 
                 if (choice == 1)
                 {
@@ -37,6 +43,7 @@ namespace EmployeeLogin
                     if (!int.TryParse(Console.ReadLine(), out int empId))
                     {
                         Console.WriteLine("Employee ID Not Number");
+                        Console.ReadKey();
                         continue;
                     }
 
@@ -48,7 +55,8 @@ namespace EmployeeLogin
 
                         if (!decimal.TryParse(Console.ReadLine(), out decimal hours))
                         {
-                            Console.WriteLine("Employee ID Is Not Number");
+                            Console.WriteLine("Hours Not Working");
+                            Console.ReadKey();
                             continue;
                         }
 
@@ -56,6 +64,7 @@ namespace EmployeeLogin
                         if (!DateTime.TryParse(Console.ReadLine(), out DateTime date))
                         {
                             Console.WriteLine("Bukan Date");
+                            Console.ReadKey();
                             continue;
                         }
 
@@ -67,8 +76,8 @@ namespace EmployeeLogin
                             Status = "Pending"
                         });
                         dbcontext.SaveChanges();
-
-
+                        Console.WriteLine($"Employe ID {empId} - {date} with hours {hours}");
+                        Console.ReadKey();
                     }
                     else
                     {
@@ -83,6 +92,8 @@ namespace EmployeeLogin
                 }
                 else
                 {
+                    Console.WriteLine("Choice is not available");
+                    Console.ReadKey();
                     continue;
                 }
             }
