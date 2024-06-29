@@ -8,21 +8,17 @@ namespace ManagerApprove.Controllers
     public class HangfireDailyController : Controller
     {
         private readonly MiniProjDbContext _context;
-        public HangfireDailyController(MiniProjDbContext context)
+        private readonly HangfireService _hangfireService;
+        public HangfireDailyController(MiniProjDbContext context, HangfireService hangfireService)
         {
             _context = context;
+            _hangfireService = hangfireService;
         }
         public IActionResult Index()
         {
-            var dataEmployeeAll = _context.Employees.ToList();
-
-            foreach (var employee in dataEmployeeAll)
-            {
-                RecurringJob.AddOrUpdate(() => Console.WriteLine(employee.Name), Cron.Minutely);
-            }
+            RecurringJob.AddOrUpdate(() => _hangfireService.Print());
 
             return Redirect("/Hangfire");
-            return Json(dataEmployeeAll);
             //return Json();
         }
     }
