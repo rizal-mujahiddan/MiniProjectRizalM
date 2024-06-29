@@ -67,40 +67,21 @@ Employee Timesheet Management is a streamlined application designed to manage em
 2. **Set Up the Database**
    - Configure your SQL Server database.
    - Update the connection string in `appsettings.json`.
-   - Like this
+   - Connect in docker database only.
 
-3. **Run the Console Application**
-   ```sh
-   cd EmployeeConsoleApp
-   dotnet run
-   ```
+3. **Open Visual Studio**
 
-4. **Run the ASP.NET Core Web Application**
-   ```sh
-   cd ManagerApprove
-   dotnet run
-   ```
-
-5. **Run Docker Containers**
-   ```sh
-   docker-compose up
-   ```
-
-6. **Set Up Hangfire**
-   - Using Rizal Mujahiddan
-
+4. **Build and Run in visual studio (f5)**
+   
 ## Usage
 
 ### Employee Console Application
-- Launch the console app.
+- Launch the console app (with visual studio).
 - Log in with your employee ID.
-- Enter your daily work hours and submit.
+- Enter your daily work hours and date and submit.
 
 ### Manager ASP.NET Core Application
 - Launch the web application.
 - Dont forget connecting using docker website
 - View pending and approve timesheets.
 - Approve or reject timesheets as necessary.
-
-## Contributing
-Contributions are welcome! Please fork the repository and submit a pull request for review.
