@@ -20,6 +20,8 @@ namespace ManagerApprove.Controllers
             {
                 RecurringJob.AddOrUpdate(() => Console.WriteLine(employee.Name), Cron.Minutely);
             }
+
+            return Redirect("/Hangfire");
             return Json(dataEmployeeAll);
             //return Json();
         }

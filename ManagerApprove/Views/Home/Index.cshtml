@@ -1,5 +1,5 @@
 ﻿<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Welcome, Manager</h1>
 
     <div>
         <form method="get" id="pageSizeForm">
@@ -13,6 +13,8 @@
         </form>
     </div>
 
+
+
     <table class="table table-hover table-striped" id="myTable">
         <!-- Table headers -->
         <thead>
@@ -24,7 +26,7 @@
                 <!-- Other columns -->
             </tr>
         </thead>
-        <tbody>
+        <tbody class="table-group-divider">
             @foreach (var timesh in Model.Items)
             {
                 <tr style="cursor:pointer;" data-url="@Url.Action("Details", "Home", new { id = timesh.TimesheetId })">
