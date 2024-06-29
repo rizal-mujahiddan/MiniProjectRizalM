@@ -11,6 +11,7 @@ Employee Timesheet Management is a streamlined application designed to manage em
 
 ### Managers
 - **Approve/Reject Logged Hours**: Managers use an ASP.NET Core web application to view, approve, or reject the timesheets submitted by employees.
+- **Triggers**: Get data audit in trigger 
 
 ## Database Structure
 
