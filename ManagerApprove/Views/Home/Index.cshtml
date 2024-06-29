@@ -4,7 +4,7 @@
     <div>
         <form method="get" id="pageSizeForm">
             <label for="pageSize">Items per page:</label>
-            <select id="pageSize" name="pageSize" data-selected-size="@Model.PageSize">
+            <select class="form-select text-sm-center" id="pageSize" name="pageSize" data-selected-size="@Model.PageSize">
                 <option value="25">25</option>
                 <option value="50">50</option>
                 <option value="75">75</option>
@@ -19,6 +19,7 @@
         <!-- Table headers -->
         <thead>
             <tr>
+                <th>Timesheet ID</th>
                 <th>Name</th>
                 <th>Date</th>
                 <th>Hours Worked</th>
@@ -27,26 +28,31 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            @foreach (var timesh in Model.Items)
-            {
-                <tr style="cursor:pointer;" data-url="@Url.Action("Details", "Home", new { id = timesh.TimesheetId })">
-                    <td>@timesh.Name</td>
-                    <td>@timesh.Date</td>
-                    <td>@timesh.HoursWorked</td>
-                    <td>@timesh.Status</td>
-                    <!-- Other columns -->
-                </tr>
+            @if(Model.Items != null){ 
+                foreach (var timesh in Model.Items)
+                {
+                    <tr style="cursor:pointer;" data-url="@Url.Action("Details", "Home", new { id = timesh.TimesheetId })">
+                        <td>@timesh.TimesheetId</td>
+                        <td>@timesh.Name</td>
+                        <td>@timesh.Date</td>
+                        <td>@timesh.HoursWorked</td>
+                        <td>@timesh.Status</td>
+                        <!-- Other columns -->
+                    </tr>
+                }
             }
         </tbody>
     </table>
 
     <nav>
         <ul class="pagination">
-            @for (int i = 1; i <= Model.TotalPages; i++)
-            {
-                <li class="page-item @(i == Model.PageIndex ? "active" : "")">
-                    <a class="page-link" href="@Url.Action("Index", new { pageIndex = i, pageSize = Model.PageSize })">@i</a>
-                </li>
+            @if(Model != null){ 
+                for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { pageIndex = i, pageSize = Model.PageSize })">@i</a>
+                    </li>
+                }
             }
         </ul>
     </nav>
