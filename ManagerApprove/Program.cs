@@ -32,7 +32,7 @@ config.SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
         DisableGlobalLocks = true
     })
 );
-
+builder.Services.AddTransient<HangfireService>();
 builder.Services.AddHangfireServer();
 
 var app = builder.Build();
